@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from schema.user import User, SignUp, Product
+from router.book_route import book_router
 
-app =  FastAPI(
-    title="FastAPI",
+# 1. Create a FastAPI instance
+version = "v1"
+app = FastAPI(
+    version=version
 )
 
-@app.post("/user")
-def read_root(product: Product):
-    print(product)
-    return {"message": "Hello World"}
 
+
+app.include_router(book_router, prefix=f"/api/{version}/book", tags=["Books"])
